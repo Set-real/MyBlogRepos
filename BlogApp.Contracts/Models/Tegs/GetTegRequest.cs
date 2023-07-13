@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BlogApp.Contracts.Models.Tegs
+﻿namespace BlogApp.Contracts.Models.Tegs
 {
-    internal class GetTegRequest
+    public class GetTegRequest
     {
+        public int TegAmount { get; set; }
+        public TegView TegView { get; set; }
+    }
+    public class TegView
+    {
+        public string Value { get; set; }
+        public DateTime CreateDate { get; set; }
     }
 }

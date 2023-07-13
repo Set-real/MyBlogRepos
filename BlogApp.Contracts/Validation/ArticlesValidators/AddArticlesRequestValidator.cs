@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using BlogApp.Contracts.Models.Articles;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,8 +8,12 @@ using System.Threading.Tasks;
 
 namespace BlogApp.Contracts.Validation.ArticlesValidators
 {
-    public class AddArticlesRequestValidator: AbstractValidator<>
+    public class AddArticlesRequestValidator: AbstractValidator<AddArticlesReqest>
     {
-        RullFor(x => x.Name)
+        public AddArticlesRequestValidator() 
+        {
+            RuleFor(x => x.ArticleContext).NotEmpty();
+            RuleFor(x => x.ArticlesName).NotEmpty().MaximumLength(50);
+        }
     }
 }

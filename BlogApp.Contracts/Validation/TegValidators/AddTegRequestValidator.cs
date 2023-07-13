@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BlogApp.Contracts.Models.Tegs;
+using FluentValidation;
 
 namespace BlogApp.Contracts.Validation.TegValidators
 {
-    internal class AddTegRequestValidator
+    public class AddTegRequestValidator: AbstractValidator<AddTegRequest>
     {
+        public AddTegRequestValidator()
+        {
+            RuleFor(x => x.Value).NotEmpty().MaximumLength(100);
+        }
     }
 }

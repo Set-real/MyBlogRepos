@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BlogApp.Contracts.Models.Tegs
+namespace BlogApp.Contracts.Validation.UserValidators
 {
-    public class AddTegRequest
+    internal class AddUserRequest
     {
-        public string Value { get; set; }
     }
 }

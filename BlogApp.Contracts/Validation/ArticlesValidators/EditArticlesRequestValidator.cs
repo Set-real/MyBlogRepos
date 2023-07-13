@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BlogApp.Contracts.Models.Articles;
+using FluentValidation;
 
 namespace BlogApp.Contracts.Validation.ArticlesValidators
 {
-    internal class EditArticlesRequestValidator
+    public class EditArticlesRequestValidator: AbstractValidator<EditArticleRequest>
     {
+        public EditArticlesRequestValidator()
+        {
+            RuleFor(x => x.NewArticleContext).NotEmpty();
+            RuleFor(x => x.NewArticleName).NotEmpty().MaximumLength(50);
+        }
     }
 }

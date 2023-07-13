@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace BlogApp.Contracts.Models.Articles
 {
-    internal class AddArticlesReqest
+    public class AddArticlesReqest
     {
+        public string ArticlesName { get; set; }
+        public string ArticleContext { get; set; }
     }
 }

@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BlogApp.Contracts.Models.Tegs
+namespace BlogApp.Contracts.Models.Users
 {
-    public class AddTegRequest
+    public class AddUserRequest
     {
-        public string Value { get; set; }
+
     }
 }

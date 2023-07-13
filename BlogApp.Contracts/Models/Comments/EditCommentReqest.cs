@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace BlogApp.Contracts.Models.Comments
 {
-    internal class EditCommentReqest
+    public class EditCommentReqest
     {
+        public string NewContent { get; set; }
     }
 }

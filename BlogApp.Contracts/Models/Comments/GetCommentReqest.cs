@@ -6,7 +6,14 @@ using System.Threading.Tasks;
 
 namespace BlogApp.Contracts.Models.Comments
 {
-    internal class GetCommentReqest
+    public class GetCommentReqest
     {
+        public int CommentAmount { get; set; }
+        public CommentView[] CommentView { get; set; }
+    }
+    public class CommentView
+    {
+        public string Content { get; set; }
+        public DateTime CreateDate { get; set; }
     }
 }

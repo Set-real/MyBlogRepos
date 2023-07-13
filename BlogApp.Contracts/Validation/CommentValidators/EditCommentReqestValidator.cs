@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BlogApp.Contracts.Models.Comments;
+using FluentValidation;
 
 namespace BlogApp.Contracts.Validation.CommentValidators
 {
-    internal class EditCommentReqestValidator
+    public class EditCommentReqestValidator: AbstractValidator<EditCommentReqest>
     {
+        public EditCommentReqestValidator()
+        {
+            RuleFor(x => x.NewContent).NotEmpty();
+        }
     }
 }
