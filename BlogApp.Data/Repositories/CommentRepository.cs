@@ -72,7 +72,7 @@ namespace BlogApp.Data.Repositories
         /// <param name="comment"></param>
         /// <param name="query"></param>
         /// <returns></returns>
-        public async Task UpdateComment(Comment comment, UpdateCommentQuery query)
+        public async Task UpdateComment(Comment comment, UpdateArticleQuery query)
         {
            if(!string.IsNullOrEmpty(query.NewContent))
                 comment.Content = query.NewContent;

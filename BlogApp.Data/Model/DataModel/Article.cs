@@ -8,6 +8,7 @@
         public Guid Id { get; set; } = Guid.NewGuid();
         public string Content { get; set; } = string.Empty;
         public DateTime DateCreated { get; set; } = DateTime.Now;
+        public string Name { get; set; }
 
         // Связь статьи с пользователем
         public Guid User_Id { get; set; }

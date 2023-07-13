@@ -7,7 +7,7 @@ namespace BlogApp.Data.Repositories
     public interface IArticlRepository
     {
         public Task CreateArticle(Article article, User user);
-        public Task UpdateArticle(Article article, User user, UpdateCommentQuery query);
+        public Task UpdateArticle(Article article, User user, UpdateArticleQuery query);
         public Task DeleteArticle(Article article);
         public Task<Article> GetArticleById(Guid id);
         public Task<Article[]> GetArticles();

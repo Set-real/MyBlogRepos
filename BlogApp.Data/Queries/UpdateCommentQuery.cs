@@ -3,10 +3,10 @@
     /// <summary>
     /// Класс для обновления комментариев
     /// </summary>
-    public class UpdateCommentQuery
+    public class UpdateArticleQuery
     {
         public string NewContent { get; } = string.Empty;
-        public UpdateCommentQuery(string newContent) 
+        public UpdateArticleQuery(string newContent) 
         {
             NewContent = newContent;
         }

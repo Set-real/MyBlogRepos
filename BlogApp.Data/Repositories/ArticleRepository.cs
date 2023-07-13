@@ -75,9 +75,11 @@ namespace BlogApp.Data.Repositories
         /// <param name="user"></param>
         /// <param name="query"></param>
         /// <returns></returns>
-        public async Task UpdateArticle(Article article, User user, UpdateCommentQuery query)
+        public async Task UpdateArticle(Article article, User user, UpdateArticleQuery query)
         {
             article.User_Id = user.Id;
+            article.Content = query.NewContent;
+            article.Name = query.NewName;
 
             if(!string.IsNullOrEmpty(query.NewContent))
                 article.Content = query.NewContent;
