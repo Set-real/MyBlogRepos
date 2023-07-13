@@ -1,11 +1,6 @@
 ﻿using BlogApp.Data.Queries;
 using BlogApp.Model;
 using BlogApp.Model.DataModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BlogApp.Data.Repositories
 {

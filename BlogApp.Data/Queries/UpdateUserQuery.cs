@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BlogApp.Data.Queries
+﻿namespace BlogApp.Data.Queries
 {
     /// <summary>
     /// Класс для обновления пользователя

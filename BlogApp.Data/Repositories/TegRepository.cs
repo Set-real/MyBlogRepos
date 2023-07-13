@@ -61,7 +61,12 @@ namespace BlogApp.Data.Repositories
             return await _context.Tegs
                 .ToArrayAsync();
         }
-
+        /// <summary>
+        /// Метод для изменения тега
+        /// </summary>
+        /// <param name="teg"></param>
+        /// <param name="query"></param>
+        /// <returns></returns>
         public async Task UpdateTeg(Teg teg, UpdateTegQuery query)
         {
             if(!string.IsNullOrEmpty(query.NewTeg))
