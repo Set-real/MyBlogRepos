@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace BlogApp.Data.Model.DataModel
 {
-    internal class Role
+    public class Role
     {
+        public Guid Id { get; set; } = Guid.NewGuid();
+        public string Name { get; set; }
     }
 }

@@ -1,13 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc.Formatters;
-
-namespace BlogApp.Model.DataModel
+﻿namespace BlogApp.Model.DataModel
 {
     /// <summary>
     /// Модель статьи
     /// </summary>
     public class Article
     {
-        public Guid Id { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
         public string Content { get; set; } = string.Empty;
         public DateTime DateCreated { get; set; } = DateTime.Now;
 

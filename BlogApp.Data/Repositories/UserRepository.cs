@@ -1,5 +1,7 @@
-﻿using BlogApp.Data.Queries;
+﻿using BlogApp.Data.Context;
+using BlogApp.Data.Queries;
 using BlogApp.Model;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,17 +12,26 @@ namespace BlogApp.Data.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        public Task DeleteUser(Guid id)
+        public BlogContext _context;
+        public UserRepository(BlogContext context)
         {
-            throw new NotImplementedException();
+            context = _context;
+        }
+        public async Task DeleteUser(User user)
+        {
+            var entry = _context.Entry(user);
+            if(entry.State == EntityState.Detached)
+                _context.Remove(entry);
+
+            await _context.SaveChangesAsync();
         }
 
-        public Task<User> GetById(Guid id)
+        public Task<User> GetAllUsers()
         {
-            throw new NotImplementedException();
+            
         }
 
-        public Task<User[]> GetUsers()
+        public Task<User> GetUserById(Guid id)
         {
             throw new NotImplementedException();
         }
@@ -31,6 +42,11 @@ namespace BlogApp.Data.Repositories
         }
 
         public Task UpdateUser(User user, UpdateUserQuery query)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<User[]> IUserRepository.GetAllUsers()
         {
             throw new NotImplementedException();
         }

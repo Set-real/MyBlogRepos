@@ -1,14 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc.Formatters;
-using System;
-
-namespace BlogApp.Model.DataModel
+﻿namespace BlogApp.Model.DataModel
 {
     /// <summary>
     /// Модель тега
     /// </summary>
     public class Teg
     {
-        public Guid Id { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
         public string Value { get; set; }
         public DateTime Date { get; set; } = DateTime.Now;
 
