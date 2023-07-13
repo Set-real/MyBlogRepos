@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "Gz1zqzzYWBEi445auTraKts97ld9pKgmpxMm+Ha+74ffRmkvuIKTi8elkXrT8090Nto5wI7nX7TZKmto2S+fNA==",
+  "dgSpecHash": "9Zkl+mHt/Oxdxla8MugV/WV+Xl965blL8cGojhr5bmgykFVjSLzKdBkikP61Xf1EPxC+yHN7pVd59KrlWBwQ3g==",
   "success": true,
   "projectFilePath": "D:\\SkillFactory\\Blog\\BlogApp.Contracts\\BlogApp.Contracts.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\maest\\.nuget\\packages\\fluentvalidation\\11.6.0\\fluentvalidation.11.6.0.nupkg.sha512"
+  ],
   "logs": []
 }

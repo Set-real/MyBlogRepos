@@ -8,9 +8,11 @@
 
   <ItemGroup>
     <Folder Include="Models\Users\" />
-    <Folder Include="Models\Comments\" />
     <Folder Include="Models\Tegs\" />
-    <Folder Include="Validation\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="11.6.0" />
   </ItemGroup>
 
 </Project>
