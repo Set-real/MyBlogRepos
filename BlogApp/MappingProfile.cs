@@ -13,6 +13,12 @@ internal class MappingProfile : Profile
         CreateMap<AddUserRequest, User>();
         CreateMap<AddTegRequest, Teg>();
         CreateMap<AddArticlesReqest, Article>();
-        CreateMap<AddCommentReqest, Comment>();
+        CreateMap<AddCommentReqest, Comment>()
+            .ForMember(x => x.Content, opt => opt.MapFrom(c => c.CommentContext));
+
+        CreateMap<User, UserView>();
+        CreateMap<Comment, CommentView>();
+        CreateMap<Article, ArticleView>();
+        CreateMap<Teg, TegView>();
     }
 }

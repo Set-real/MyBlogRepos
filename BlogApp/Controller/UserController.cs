@@ -1,11 +1,7 @@
-﻿using BlogApp.Model.Context;
-
-namespace BlogApp.Controller
+﻿namespace BlogApp.Controller
 {
     public class UserController
-    {
-        BlogContext blogContext;
-
+    {    
 
     }
 }

@@ -1,0 +1,12 @@
+D:\SkillFactory\Blog\BlogApp.Contracts\bin\Debug\net7.0\BlogApp.Contracts.deps.json
+D:\SkillFactory\Blog\BlogApp.Contracts\bin\Debug\net7.0\BlogApp.Contracts.dll
+D:\SkillFactory\Blog\BlogApp.Contracts\bin\Debug\net7.0\BlogApp.Contracts.pdb
+D:\SkillFactory\Blog\BlogApp.Contracts\obj\Debug\net7.0\BlogApp.Contracts.csproj.AssemblyReference.cache
+D:\SkillFactory\Blog\BlogApp.Contracts\obj\Debug\net7.0\BlogApp.Contracts.GeneratedMSBuildEditorConfig.editorconfig
+D:\SkillFactory\Blog\BlogApp.Contracts\obj\Debug\net7.0\BlogApp.Contracts.AssemblyInfoInputs.cache
+D:\SkillFactory\Blog\BlogApp.Contracts\obj\Debug\net7.0\BlogApp.Contracts.AssemblyInfo.cs
+D:\SkillFactory\Blog\BlogApp.Contracts\obj\Debug\net7.0\BlogApp.Contracts.csproj.CoreCompileInputs.cache
+D:\SkillFactory\Blog\BlogApp.Contracts\obj\Debug\net7.0\BlogApp.Contracts.dll
+D:\SkillFactory\Blog\BlogApp.Contracts\obj\Debug\net7.0\refint\BlogApp.Contracts.dll
+D:\SkillFactory\Blog\BlogApp.Contracts\obj\Debug\net7.0\BlogApp.Contracts.pdb
+D:\SkillFactory\Blog\BlogApp.Contracts\obj\Debug\net7.0\ref\BlogApp.Contracts.dll

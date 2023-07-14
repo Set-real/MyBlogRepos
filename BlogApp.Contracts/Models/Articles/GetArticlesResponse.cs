@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BlogApp.Contracts.Models.Articles
 {
-    public class GetArticlesRequest
+    public class GetArticlesResponse
     {
         public int ArticleAmont { get; set; }
         public ArticleView[] articleViews { get ; set; }  

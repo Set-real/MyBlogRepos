@@ -1,6 +1,6 @@
 ﻿namespace BlogApp.Contracts.Models.Tegs
 {
-    public class GetTegRequest
+    public class GetTegResponse
     {
         public int TegAmount { get; set; }
         public TegView TegView { get; set; }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BlogApp.Contracts.Models.Comments
 {
-    public class GetCommentReqest
+    public class GetCommentResponse
     {
         public int CommentAmount { get; set; }
         public CommentView[] CommentView { get; set; }
