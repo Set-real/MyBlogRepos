@@ -1,9 +1,7 @@
 ﻿using AutoMapper;
 using BlogApp.Contracts.Models.Articles;
-using BlogApp.Contracts.Models.Users;
 using BlogApp.Data.Queries;
 using BlogApp.Data.Repositories;
-using BlogApp.Model;
 using BlogApp.Model.DataModel;
 using Microsoft.AspNetCore.Mvc;
 
@@ -74,6 +72,12 @@ namespace BlogApp.Controller
 
             return StatusCode(200, verifiableArticle);
         }
+        /// <summary>
+        /// Метод для обновления статьи
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [HttpPatch]
         [Route("Id")]
         public async Task<IActionResult> UpdateArticle(
@@ -90,11 +94,28 @@ namespace BlogApp.Controller
                 return StatusCode(400, "Статья не найдена");
 
             var updateArticle = _articl.UpdateArticle(
-                article,
-                user,
+                await article,
+                await user,
                 new UpdateArticleQuery(request.NewArticleName, request.NewArticleContext));
 
             return StatusCode(200, updateArticle);
+        }
+        /// <summary>
+        /// Метод для удаления статьи
+        /// </summary>
+        /// <param name="reqest"></param>
+        /// <returns></returns>
+        [HttpDelete]
+        [Route("")]
+        public async Task<IActionResult> DeliteArticle(AddArticlesReqest reqest)
+        {
+            var article = _articl.GetArticleById(reqest.Id);
+            if (article == null)
+                return StatusCode(400, "Статья не найдена!");
+
+            var deliteArticle = _articl.DeleteArticle(await article);
+
+            return StatusCode(200, deliteArticle);
         }
     }
 }

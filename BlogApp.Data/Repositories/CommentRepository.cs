@@ -53,7 +53,8 @@ namespace BlogApp.Data.Repositories
         /// <returns></returns>
         public async Task<Comment[]> GetAllComments()
         {
-            return await _context.Comments.ToArrayAsync();
+            return await _context.Comments
+                .ToArrayAsync();
         }
         /// <summary>
         /// Метод для получения комментария по Id
@@ -72,7 +73,7 @@ namespace BlogApp.Data.Repositories
         /// <param name="comment"></param>
         /// <param name="query"></param>
         /// <returns></returns>
-        public async Task UpdateComment(Comment comment, UpdateArticleQuery query)
+        public async Task UpdateComment(Comment comment, UpdateCommentQuery query)
         {
            if(!string.IsNullOrEmpty(query.NewContent))
                 comment.Content = query.NewContent;

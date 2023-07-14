@@ -9,7 +9,7 @@ namespace BlogApp.Contracts.Models.Comments
     public class GetCommentResponse
     {
         public int CommentAmount { get; set; }
-        public CommentView[] CommentView { get; set; }
+        public CommentView[] commentView { get; set; }
     }
     public class CommentView
     {
