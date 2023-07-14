@@ -7,6 +7,7 @@
     }
     public class TegView
     {
+        public Guid Id { get; set; }
         public string Value { get; set; }
         public DateTime CreateDate { get; set; }
     }

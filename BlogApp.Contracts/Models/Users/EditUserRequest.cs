@@ -8,6 +8,7 @@ namespace BlogApp.Contracts.Models.Users
 {
     public class EditUserRequest
     {
+        public Guid Id { get; set; }
         public string NewFirstName { get; set; }
         public string NewLastName { get; set; }
         public string NewEmail { get; set; }

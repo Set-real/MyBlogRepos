@@ -8,6 +8,7 @@ namespace BlogApp.Contracts.Models.Tegs
 {
     public class AddTegRequest
     {
+        public Guid Id { get; set; }
         public string Value { get; set; }
     }
 }

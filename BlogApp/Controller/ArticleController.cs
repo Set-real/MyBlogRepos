@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BlogApp.Contracts.Models.Articles;
 using BlogApp.Contracts.Models.Users;
+using BlogApp.Data.Queries;
 using BlogApp.Data.Repositories;
 using BlogApp.Model;
 using BlogApp.Model.DataModel;
@@ -10,7 +11,7 @@ namespace BlogApp.Controller
 {
     [ApiController]
     [Route("[ArticleController]")]
-    public class ArticleController: ControllerBase
+    public class ArticleController : ControllerBase
     {
         public IUserRepository _user;
         public IArticlRepository _articl;
@@ -47,12 +48,12 @@ namespace BlogApp.Controller
         /// <returns>StatusCode(200, newArticle)</returns>
         [HttpPost]
         [Route("")]
-        public async Task<IActionResult> CreateArticle(AddArticlesReqest reqest, User userMod)
+        public async Task<IActionResult> CreateArticle(AddArticlesReqest reqest)
         {
             //Проверяю пользователя на null
-            var user = await _user.GetUserById(userMod.Id);
-            if(user == null)
-                return StatusCode(400, $"Пользователь с Id {user} не найден!");
+            var user = await _user.GetUserById(reqest.Id);
+            if (user == null)
+                return StatusCode(400, $"Пользователь {user.FirstName} не найден!");
 
             // Добавляю статью
             var newArticle = _mapper.Map<AddArticlesReqest, Article>(reqest);
@@ -67,20 +68,33 @@ namespace BlogApp.Controller
         /// <returns>StatusCode(200, verifiableArticle)</returns>
         [HttpGet]
         [Route("")]
-        public async Task<IActionResult> GetsArticleById(Article article)
+        public async Task<IActionResult> GetsArticleById(AddArticlesReqest article)
         {
             var verifiableArticle = await _articl.GetArticleById(article.Id);
 
-           return StatusCode(200, verifiableArticle);
+            return StatusCode(200, verifiableArticle);
         }
-        //[HttpPatch]
-        //[Route("Id")]
-        //public async Task<IActionResult> UpdateArticle(
-        //    [FromRoute] Guid Id,
-        //    [FromBody] EditArticleRequest request
-        //    )
-        //{
+        [HttpPatch]
+        [Route("Id")]
+        public async Task<IActionResult> UpdateArticle(
+            [FromRoute] Guid Id,
+            [FromBody] EditArticleRequest request
+            )
+        {
+            var user = _user.GetUserById(Id);
+            if (user == null)
+                return StatusCode(400, "Пользователь не найден!");
 
-        //}
+            var article = _articl.GetArticleById(Id);
+            if (article == null)
+                return StatusCode(400, "Статья не найдена");
+
+            var updateArticle = _articl.UpdateArticle(
+                article,
+                user,
+                new UpdateArticleQuery(request.NewArticleName, request.NewArticleContext));
+
+            return StatusCode(200, updateArticle);
+        }
     }
 }
