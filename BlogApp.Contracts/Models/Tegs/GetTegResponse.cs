@@ -3,7 +3,7 @@
     public class GetTegResponse
     {
         public int TegAmount { get; set; }
-        public TegView TegView { get; set; }
+        public TegView[] TegView { get; set; }
     }
     public class TegView
     {

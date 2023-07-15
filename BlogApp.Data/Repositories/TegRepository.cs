@@ -62,7 +62,7 @@ namespace BlogApp.Data.Repositories
                 .ToArrayAsync();
         }
         /// <summary>
-        /// Метод для изменения тега
+        /// Метод для изменения тегаd
         /// </summary>
         /// <param name="teg"></param>
         /// <param name="query"></param>
