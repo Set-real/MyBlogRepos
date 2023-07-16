@@ -48,6 +48,7 @@ builder.Services.AddScoped<IValidator<EditTegRequest>, EditTegRequestValidator>(
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<BlogContext>(option => option.UseSqlServer(connectionString), ServiceLifetime.Singleton);
 
+builder.Services.AddSwaggerGen();
 
 builder.Services.AddRazorPages();
 
@@ -56,6 +57,8 @@ var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 app.UseStaticFiles();
 
@@ -63,6 +66,6 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-//app.MapRazorPages();
+app.MapRazorPages();
 
 app.Run();
