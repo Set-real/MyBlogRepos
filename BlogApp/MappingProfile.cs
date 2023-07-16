@@ -11,6 +11,7 @@ internal class MappingProfile : Profile
     public MappingProfile() 
     {
         CreateMap<AddUserRequest, User>();
+        CreateMap<User, AddUserRequest>();
         CreateMap<AddTegRequest, Teg>();
         CreateMap<AddArticlesReqest, Article>();
         CreateMap<AddCommentReqest, Comment>()

@@ -50,8 +50,8 @@ namespace BlogApp.Controller
         {
             //Проверяю пользователя на null
             var user = await _user.GetUserById(reqest.Id);
-            if (user == null)
-                return StatusCode(400, $"Пользователь {user.FirstName} не найден!");
+            if (user != null)
+                return StatusCode(400, $"Пользователь {user.FirstName} уже существует!");
 
             // Добавляю статью
             var newArticle = _mapper.Map<AddArticlesReqest, Article>(reqest);

@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace BlogApp.Controller
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("[CommentController]")]
     public class CommentController: ControllerBase
     {
         private IMapper _mapper;

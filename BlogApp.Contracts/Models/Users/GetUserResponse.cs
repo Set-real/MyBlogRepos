@@ -9,7 +9,7 @@ namespace BlogApp.Contracts.Models.Users
     public class GetUserResponse
     {
         public int UserAmount { get; set; }
-        public UserView UserView { get; set; }
+        public UserView[] UserView { get; set; }
     }
     public class UserView
     {
