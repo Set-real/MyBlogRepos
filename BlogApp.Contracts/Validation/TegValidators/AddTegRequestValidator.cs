@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace BlogApp.Contracts.Validation.TegValidators
 {
-    public class AddTegRequestValidator: AbstractValidator<AddTegRequest>
+    public class AddTegRequestValidator: AbstractValidator<TegRequest>
     {
         public AddTegRequestValidator()
         {

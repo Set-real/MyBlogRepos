@@ -3,9 +3,12 @@ using BlogApp.Contracts.Models.Users;
 using BlogApp.Data.Queries;
 using BlogApp.Data.Repositories;
 using BlogApp.Model;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using System.Runtime;
 using System.Security.Authentication;
+using System.Security.Claims;
 
 namespace BlogApp.Controller
 {
@@ -46,7 +49,7 @@ namespace BlogApp.Controller
         /// <returns></returns>
         [HttpGet]
         [Route("")]
-        public async Task<IActionResult> GetUserById(AddUserRequest request)
+        public async Task<IActionResult> GetUserById(UserRequest request)
         {
             var user = _user.GetUserById(request.Id);
             if (user == null)
@@ -65,13 +68,13 @@ namespace BlogApp.Controller
         /// <returns></returns>
         [HttpPost]
         [Route("")]
-        public async Task<IActionResult> RegistUser(AddUserRequest request)
+        public async Task<IActionResult> RegistUser(UserRequest request)
         {
             var user = _user.GetUserById(request.Id);
             if (user != null)
                 return StatusCode(400, "Такой пользователь уже существует!");
 
-            var newUser = _mapper.Map<AddUserRequest, User>(request);
+            var newUser = _mapper.Map<UserRequest, User>(request);
             await _user.RegistUser(newUser);
 
             return StatusCode(200, newUser);
@@ -110,7 +113,7 @@ namespace BlogApp.Controller
         /// <returns></returns>
         [HttpDelete]
         [Route("")]
-        public async Task<IActionResult> DeliteUser(AddUserRequest request)
+        public async Task<IActionResult> DeliteUser(UserRequest request)
         {
             var user = await _user.GetUserById(request.Id);
             if (user == null)
@@ -131,7 +134,7 @@ namespace BlogApp.Controller
         /// <exception cref="AuthenticationException"></exception>
         [HttpPost]
         [Route("Authenticate")]
-        public UserView Authenticate(AddUserRequest request, string login, string password)
+        public async Task<UserView> Authenticate(UserRequest request, string login, string password)
         {
             if (!string.IsNullOrEmpty(request.Login) ||
                 (!string.IsNullOrEmpty(request.Password)
@@ -144,6 +147,20 @@ namespace BlogApp.Controller
 
             if (request.Password != password)
                 throw new AuthenticationException("Неверный пароль");
+
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimsIdentity.DefaultIssuer, request.Login),
+                new Claim(ClaimsIdentity.DefaultIssuer, request.Password)
+            };
+
+            ClaimsIdentity claimsIdentity = new ClaimsIdentity(
+                claims,
+                "AddCookies",
+                ClaimsIdentity.DefaultNameClaimType,
+                ClaimsIdentity.DefaultRoleClaimType);
+
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
 
             return _mapper.Map<UserView>(user);
         }

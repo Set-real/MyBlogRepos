@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace BlogApp.Contracts.Validation.CommentValidators
 {
-    public class AddCommentReqestValidator: AbstractValidator<AddCommentReqest>
+    public class AddCommentReqestValidator: AbstractValidator<CommentReqest>
     {
         public AddCommentReqestValidator()
         {

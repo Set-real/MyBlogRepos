@@ -11,6 +11,7 @@ using BlogApp.Data.Context;
 using BlogApp.Data.Repositories;
 using BlogApp.Model;
 using FluentValidation;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
@@ -19,6 +20,10 @@ using Microsoft.IdentityModel.Tokens;
 using System.Formats.Tar;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Регистрирую строку подключения
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<BlogContext>(option => option.UseSqlServer(connectionString), ServiceLifetime.Singleton);
 
 // Добавляю маппер
 var mapperConfig = new MapperConfiguration(mc =>
@@ -35,20 +40,32 @@ builder.Services.AddSingleton<ICommentRepository, CommentRepository>();
 builder.Services.AddSingleton<IArticlRepository, ArticleRepository>();
 
 // Регистрация валидиции
-builder.Services.AddScoped<IValidator<AddUserRequest>, AddUserRequestValidator>();
+builder.Services.AddScoped<IValidator<UserRequest>, AddUserRequestValidator>();
 builder.Services.AddScoped<IValidator<EditUserRequest>, EditUserRequestValidator>();
-builder.Services.AddScoped<IValidator<AddArticlesReqest>, AddArticlesRequestValidator>();
+builder.Services.AddScoped<IValidator<ArticlesReqest>, AddArticlesRequestValidator>();
 builder.Services.AddScoped<IValidator<EditArticleRequest>, EditArticlesRequestValidator>();
-builder.Services.AddScoped<IValidator<AddCommentReqest>, AddCommentReqestValidator>();
+builder.Services.AddScoped<IValidator<CommentReqest>, AddCommentReqestValidator>();
 builder.Services.AddScoped<IValidator<EditCommentReqest>, EditCommentReqestValidator>();
-builder.Services.AddScoped<IValidator<AddTegRequest>, AddTegRequestValidator>();
+builder.Services.AddScoped<IValidator<TegRequest>, AddTegRequestValidator>();
 builder.Services.AddScoped<IValidator<EditTegRequest>, EditTegRequestValidator>();
 
-// Регистрирую строку подключения
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<BlogContext>(option => option.UseSqlServer(connectionString), ServiceLifetime.Singleton);
-
+// Подключаю сваггер
 builder.Services.AddSwaggerGen();
+builder.Services.AddEndpointsApiExplorer();
+
+// Если пользователь не проходит аутентификацию, то получает ошибкув
+builder.Services.AddAuthentication(options => options.DefaultScheme = "Cookies")
+    .AddCookie("Cookies", options =>
+    {
+        options.Events = new Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationEvents
+        {
+            OnRedirectToLogin = redirectContext =>
+            {
+                redirectContext.HttpContext.Response.StatusCode = 401;
+                return Task.CompletedTask;
+            }
+        };
+    });
 
 builder.Services.AddRazorPages();
 
@@ -58,12 +75,18 @@ if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(options =>
+    {
+        options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+        options.RoutePrefix = string.Empty;
+    });
 }
 app.UseStaticFiles();
 
 app.UseRouting();
 
+// Подключаю аутентификацию и авторизацию
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRazorPages();

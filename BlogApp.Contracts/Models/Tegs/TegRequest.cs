@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BlogApp.Contracts.Models.Tegs
 {
-    public class AddTegRequest
+    public class TegRequest
     {
         public Guid Id { get; set; }
         public string Value { get; set; }

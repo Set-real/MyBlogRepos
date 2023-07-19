@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BlogApp.Contracts.Models.Articles
 {
-    public class AddArticlesReqest
+    public class ArticlesReqest
     {
         public Guid Id { get; set; }
         public string ArticlesName { get; set; }

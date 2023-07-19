@@ -14,11 +14,13 @@ namespace BlogApp.Controller
         public IUserRepository _user;
         public IArticlRepository _articl;
         public IMapper _mapper;
-        public ArticleController(IArticlRepository articl, IUserRepository user, IMapper mapper)
+        public Ilogger _logger;
+        public ArticleController(IArticlRepository articl, IUserRepository user, IMapper mapper, Ilogger logger)
         {
             _articl = articl;
             _mapper = mapper;
             _user = user;
+            _logger = logger;
         }
         /// <summary>
         /// Метод для получения всех статей
@@ -46,15 +48,17 @@ namespace BlogApp.Controller
         /// <returns>StatusCode(200, newArticle)</returns>
         [HttpPost]
         [Route("")]
-        public async Task<IActionResult> CreateArticle(AddArticlesReqest reqest)
+        public async Task<IActionResult> CreateArticle(ArticlesReqest reqest)
         {
             //Проверяю пользователя на null
             var user = await _user.GetUserById(reqest.Id);
             if (user != null)
                 return StatusCode(400, $"Пользователь {user.FirstName} уже существует!");
 
+            _logger.WriteError($"Пользователь {user.FirstName} уже существует!");
+
             // Добавляю статью
-            var newArticle = _mapper.Map<AddArticlesReqest, Article>(reqest);
+            var newArticle = _mapper.Map<ArticlesReqest, Article>(reqest);
             await _articl.CreateArticle(newArticle, user);
 
             return StatusCode(200, newArticle);
@@ -66,7 +70,7 @@ namespace BlogApp.Controller
         /// <returns>StatusCode(200, verifiableArticle)</returns>
         [HttpGet]
         [Route("")]
-        public async Task<IActionResult> GetsArticleById(AddArticlesReqest article)
+        public async Task<IActionResult> GetsArticleById(ArticlesReqest article)
         {
             var verifiableArticle = await _articl.GetArticleById(article.Id);
 
@@ -89,9 +93,13 @@ namespace BlogApp.Controller
             if (user == null)
                 return StatusCode(400, "Пользователь не найден!");
 
+            _logger.WriteError("Пользователь не найден!");
+
             var article = _articl.GetArticleById(Id);
             if (article == null)
                 return StatusCode(400, "Статья не найдена");
+
+            _logger.WriteError("Статья не найдена");
 
             var updateArticle = _articl.UpdateArticle(
                 await article,
@@ -107,11 +115,13 @@ namespace BlogApp.Controller
         /// <returns></returns>
         [HttpDelete]
         [Route("")]
-        public async Task<IActionResult> DeliteArticle(AddArticlesReqest reqest)
+        public async Task<IActionResult> DeliteArticle(ArticlesReqest reqest)
         {
             var article = _articl.GetArticleById(reqest.Id);
             if (article == null)
                 return StatusCode(400, "Статья не найдена!");
+
+            _logger.WriteError("Статья не найдена");
 
             var deliteArticle = _articl.DeleteArticle(await article);
 

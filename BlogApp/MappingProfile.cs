@@ -10,11 +10,11 @@ internal class MappingProfile : Profile
 {
     public MappingProfile() 
     {
-        CreateMap<AddUserRequest, User>();
-        CreateMap<User, AddUserRequest>();
-        CreateMap<AddTegRequest, Teg>();
-        CreateMap<AddArticlesReqest, Article>();
-        CreateMap<AddCommentReqest, Comment>()
+        CreateMap<UserRequest, User>();
+        CreateMap<User, UserRequest>();
+        CreateMap<TegRequest, Teg>();
+        CreateMap<ArticlesReqest, Article>();
+        CreateMap<CommentReqest, Comment>()
             .ForMember(x => x.Content, opt => opt.MapFrom(c => c.CommentContext));
 
         CreateMap<User, UserView>();

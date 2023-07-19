@@ -45,7 +45,7 @@ namespace BlogApp.Controller
         /// <returns></returns>
         [HttpGet]
         [Route("")]
-        public async Task<IActionResult> GetTegById(AddTegRequest request)
+        public async Task<IActionResult> GetTegById(TegRequest request)
         {
             var teg = _teg.GetTegById(request.Id);
             if (teg == null)
@@ -64,7 +64,7 @@ namespace BlogApp.Controller
         /// <returns></returns>
         [HttpPost]
         [Route("")]
-        public async Task<IActionResult> CreateTeg(AddTegRequest request)
+        public async Task<IActionResult> CreateTeg(TegRequest request)
         {
             var teg = _teg.GetTegById(request.Id);
             if (teg == null)
@@ -81,7 +81,7 @@ namespace BlogApp.Controller
         /// <returns></returns>
         [HttpDelete]
         [Route("")]
-        public async Task<IActionResult> DeliteTeg(AddTegRequest request)
+        public async Task<IActionResult> DeliteTeg(TegRequest request)
         {
             var teg = _teg.GetTegById(request.Id);
             if (teg == null)

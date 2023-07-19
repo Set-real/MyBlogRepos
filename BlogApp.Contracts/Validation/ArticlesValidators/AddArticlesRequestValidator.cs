@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BlogApp.Contracts.Validation.ArticlesValidators
 {
-    public class AddArticlesRequestValidator: AbstractValidator<AddArticlesReqest>
+    public class AddArticlesRequestValidator: AbstractValidator<ArticlesReqest>
     {
         public AddArticlesRequestValidator() 
         {

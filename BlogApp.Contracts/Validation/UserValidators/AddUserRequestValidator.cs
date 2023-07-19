@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace BlogApp.Contracts.Validation.UserValidators
 {
-    public class AddUserRequestValidator: AbstractValidator<AddUserRequest>
+    public class AddUserRequestValidator: AbstractValidator<UserRequest>
     {
         public AddUserRequestValidator()
         {

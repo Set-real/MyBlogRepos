@@ -33,7 +33,7 @@ namespace BlogApp.Controller
         /// <returns></returns>
         [HttpPost]
         [Route("")]
-        public async Task<IActionResult> CreateComment(AddCommentReqest reqest, AddUserRequest userRequest, AddArticlesReqest articlesReqest)
+        public async Task<IActionResult> CreateComment(CommentReqest reqest, UserRequest userRequest, ArticlesReqest articlesReqest)
         {
             var user = _user.GetUserById(userRequest.Id);
             if (user == null)
@@ -47,7 +47,7 @@ namespace BlogApp.Controller
             if (article == null)
                 return StatusCode(400, "Такая статья не найдена!");
 
-            var newComment = _mapper.Map<AddCommentReqest, Comment>(reqest);
+            var newComment = _mapper.Map<CommentReqest, Comment>(reqest);
             await _comment.CreateComment(newComment, await user, await article);
 
             return StatusCode(200, newComment);
@@ -85,7 +85,7 @@ namespace BlogApp.Controller
         /// <returns></returns>
         [HttpDelete]
         [Route("")]
-        public async Task<IActionResult> DeliteComment(AddCommentReqest reqest)
+        public async Task<IActionResult> DeliteComment(CommentReqest reqest)
         {
             var comment = _comment.GetCommentById(reqest.Id);
             if (comment == null)
@@ -120,7 +120,7 @@ namespace BlogApp.Controller
         /// <returns></returns>
         [HttpGet]
         [Route("")]
-        public async Task<IActionResult> GetCommentById(AddCommentReqest reqest)
+        public async Task<IActionResult> GetCommentById(CommentReqest reqest)
         {
             var comment = _comment.GetCommentById(reqest.Id);
             if (comment == null)
