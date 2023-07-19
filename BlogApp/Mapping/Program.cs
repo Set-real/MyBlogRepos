@@ -1,5 +1,4 @@
 using AutoMapper;
-using BlogApp;
 using BlogApp.Contracts.Models.Articles;
 using BlogApp.Contracts.Models.Comments;
 using BlogApp.Contracts.Models.Tegs;
@@ -10,6 +9,7 @@ using BlogApp.Contracts.Validation.TegValidators;
 using BlogApp.Contracts.Validation.UserValidators;
 using BlogApp.Data.Context;
 using BlogApp.Data.Repositories;
+using BlogApp.Middlewares;
 using BlogApp.Model;
 using FluentValidation;
 using Microsoft.AspNetCore.Authentication;
@@ -92,6 +92,6 @@ app.UseAuthorization();
 
 app.UseLogMiddleware();
 
-app.MapRazorPages();
+//app.MapRazorPages();
 
-app.Run();
+//app.Run();
