@@ -12,6 +12,7 @@ using System.Security.Claims;
 
 namespace BlogApp.Controller
 {
+    [ExeptionHandler]
     [ApiController]
     [Route("[UserController]")]
     public class UserController: ControllerBase
@@ -150,8 +151,8 @@ namespace BlogApp.Controller
 
             var claims = new List<Claim>
             {
-                new Claim(ClaimsIdentity.DefaultIssuer, request.Login),
-                new Claim(ClaimsIdentity.DefaultIssuer, request.Password)
+                new Claim(ClaimsIdentity.DefaultNameClaimType, request.Login),
+                new Claim(ClaimsIdentity.DefaultRoleClaimType, request.Role.Name)
             };
 
             ClaimsIdentity claimsIdentity = new ClaimsIdentity(

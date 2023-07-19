@@ -1,4 +1,5 @@
 using AutoMapper;
+using BlogApp;
 using BlogApp.Contracts.Models.Articles;
 using BlogApp.Contracts.Models.Comments;
 using BlogApp.Contracts.Models.Tegs;
@@ -88,6 +89,8 @@ app.UseRouting();
 // Подключаю аутентификацию и авторизацию
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseLogMiddleware();
 
 app.MapRazorPages();
 
