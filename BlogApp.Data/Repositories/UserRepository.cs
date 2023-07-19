@@ -49,6 +49,14 @@ namespace BlogApp.Data.Repositories
                 .Where(u => u.Id == id)
                 .FirstOrDefaultAsync();
         }
+
+        public async Task<User> GetUserByLogin(string login)
+        {
+            return await _context.Users
+                .Where(u => u.Login == login)
+                .FirstOrDefaultAsync();
+        }
+
         /// <summary>
         /// Метод для регистрации нового пользователя
         /// </summary>

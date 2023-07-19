@@ -10,5 +10,6 @@ namespace BlogApp.Data.Repositories
         public Task DeleteUser(User user);
         public Task<User[]> GetAllUsers();
         public Task<User> GetUserById(Guid id);
+        public Task<User> GetUserByLogin(string login);
     }
 }

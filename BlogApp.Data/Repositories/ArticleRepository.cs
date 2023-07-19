@@ -78,11 +78,11 @@ namespace BlogApp.Data.Repositories
         public async Task UpdateArticle(Article article, User user, UpdateArticleQuery query)
         {
             article.User_Id = user.Id;
-            article.Content = query.NewContent;
-            article.Name = query.NewName;
 
             if(!string.IsNullOrEmpty(query.NewContent))
                 article.Content = query.NewContent;
+            if(!string.IsNullOrEmpty(query.NewName)) 
+                article.Name = query.NewName;
 
             var entry = _context.Entry(article);
             if( entry.State == EntityState.Detached)

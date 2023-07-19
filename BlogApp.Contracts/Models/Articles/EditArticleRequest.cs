@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace BlogApp.Contracts.Models.Articles
 {
-    internal class EditArticleRequest
+    public class EditArticleRequest
     {
+        public Guid Id { get; set; }
+        public string NewArticleName { get; set; }
+        public string NewArticleContext { get; set; }
     }
 }
