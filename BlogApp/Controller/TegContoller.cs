@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace BlogApp.Controller
 {
     [ApiController]
-    [Route("[TegController}")]
+    [Route("[controller]")]
     public class TegContoller : ControllerBase
     {
         ItegRepository _teg;

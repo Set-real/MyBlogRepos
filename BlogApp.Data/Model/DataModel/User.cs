@@ -1,4 +1,5 @@
-﻿using BlogApp.Model.DataModel;
+﻿using BlogApp.Data.Model.DataModel;
+using BlogApp.Model.DataModel;
 
 namespace BlogApp.Model
 {
@@ -20,5 +21,8 @@ namespace BlogApp.Model
 
         // Привязываю комментарий к пользователю
         public List<Comment> Comments { get; set; } = new List<Comment>();
+        
+        // Привязываю роли многие ко многим
+        public List<Role> Roles { get; set; } = new List<Role>();
     }
 }

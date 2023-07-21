@@ -1,14 +1,12 @@
-﻿using BlogApp.Logger.Logger;
-using Microsoft.Extensions.Logging;
-using System.Security.Claims;
+﻿using ILogger = BlogApp.Logger.Logger.ILogger;
 
 namespace BlogApp.Middlewares
 {
     public class LogMiddleware
     {
         private readonly RequestDelegate _next;
-        private readonly BlogApp.Logger.Logger.ILogger _logger;
-        public LogMiddleware(RequestDelegate next, BlogApp.Logger.Logger.ILogger logger)
+        private readonly ILogger _logger;
+        public LogMiddleware(RequestDelegate next, ILogger logger)
         {
             _next = next;
             _logger = logger;

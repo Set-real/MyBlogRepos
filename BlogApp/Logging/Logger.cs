@@ -1,9 +1,8 @@
-﻿using BlogApp.Logger.Logger;
-using Microsoft.Extensions.Logging;
+﻿using ILogger = BlogApp.Logger.Logger.ILogger;
 
 namespace BlogApp.Logging.Logger
 {
-    public class Logger: BlogApp.Logger.Logger.ILogger
+    public class Logger: ILogger
     {
         private ReaderWriterLockSlim lock_ = new ReaderWriterLockSlim();
         private string logDirectory { get; set; }

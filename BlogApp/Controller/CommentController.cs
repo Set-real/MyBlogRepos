@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace BlogApp.Controller
 {
     [ApiController]
-    [Route("[CommentController]")]
+    [Route("[controller]")]
     public class CommentController: ControllerBase
     {
         private IMapper _mapper;
@@ -33,7 +33,7 @@ namespace BlogApp.Controller
         /// <returns></returns>
         [HttpPost]
         [Route("")]
-        public async Task<IActionResult> CreateComment(CommentReqest reqest, UserRequest userRequest, ArticlesReqest articlesReqest)
+        public async Task<IActionResult> CreateComment([FromBody]CommentReqest reqest, [FromQuery]UserRequest userRequest, [FromQuery]ArticlesReqest articlesReqest)
         {
             var user = _user.GetUserById(userRequest.Id);
             if (user == null)

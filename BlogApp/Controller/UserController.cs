@@ -14,7 +14,7 @@ namespace BlogApp.Controller
 {
     [ExeptionHandler]
     [ApiController]
-    [Route("[UserController]")]
+    [Route("[controller]")]
     public class UserController: ControllerBase
     {    
         IUserRepository _user;
