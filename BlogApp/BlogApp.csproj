@@ -21,8 +21,4 @@
     <ProjectReference Include="..\BlogApp.Data\BlogApp.Data.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="View\" />
-  </ItemGroup>
-
 </Project>

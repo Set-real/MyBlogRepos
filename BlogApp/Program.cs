@@ -67,7 +67,7 @@ builder.Services.AddAuthentication(options => options.DefaultScheme = "Cookies")
         };
     });
 
-builder.Services.AddRazorPages();
+builder.Services.AddRazorPages(options => { options.RootDirectory = "/View/Pages"; });
 
 var app = builder.Build();
 
