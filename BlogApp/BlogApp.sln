@@ -5,9 +5,9 @@ VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlogApp", "BlogApp.csproj", "{5D3B33F7-054D-433A-ADD8-5B3941AD7FD8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogApp.Contracts", "..\BlogApp.Contracts\BlogApp.Contracts.csproj", "{3EFED0F4-E9B2-43CF-805B-E0477B9A4C4C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlogApp.Contracts", "..\BlogApp.Contracts\BlogApp.Contracts.csproj", "{3EFED0F4-E9B2-43CF-805B-E0477B9A4C4C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogApp.Data", "..\BlogApp.Data\BlogApp.Data.csproj", "{330EE036-1430-4BB6-AE95-1208F0AE3480}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlogApp.Data", "..\BlogApp.Data\BlogApp.Data.csproj", "{330EE036-1430-4BB6-AE95-1208F0AE3480}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace BlogApp.View.Pages
 {
-    public class IndexModel : PageModel
+    public class RollsModel : PageModel
     {
         public void OnGet()
         {
