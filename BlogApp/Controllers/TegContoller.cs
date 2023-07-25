@@ -5,10 +5,10 @@ using BlogApp.Data.Repositories;
 using BlogApp.Model.DataModel;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BlogApp.Controller
+namespace BlogApp.Controllers
 {
     [ApiController]
-    [Route("[TegController}")]
+    [Route("[controller]")]
     public class TegContoller : ControllerBase
     {
         ItegRepository _teg;

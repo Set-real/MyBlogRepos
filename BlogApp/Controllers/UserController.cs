@@ -2,18 +2,19 @@
 using BlogApp.Contracts.Models.Users;
 using BlogApp.Data.Queries;
 using BlogApp.Data.Repositories;
+using BlogApp.Handlers;
 using BlogApp.Model;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
-using System.Runtime;
 using System.Security.Authentication;
 using System.Security.Claims;
 
-namespace BlogApp.Controller
+namespace BlogApp.Controllers
 {
+    [ExeptionHandler]
     [ApiController]
-    [Route("[UserController]")]
+    [Route("[controller]")]
     public class UserController: ControllerBase
     {    
         IUserRepository _user;
@@ -150,8 +151,8 @@ namespace BlogApp.Controller
 
             var claims = new List<Claim>
             {
-                new Claim(ClaimsIdentity.DefaultIssuer, request.Login),
-                new Claim(ClaimsIdentity.DefaultIssuer, request.Password)
+                new Claim(ClaimsIdentity.DefaultNameClaimType, request.Login),
+                new Claim(ClaimsIdentity.DefaultRoleClaimType, request.Role.Name)
             };
 
             ClaimsIdentity claimsIdentity = new ClaimsIdentity(

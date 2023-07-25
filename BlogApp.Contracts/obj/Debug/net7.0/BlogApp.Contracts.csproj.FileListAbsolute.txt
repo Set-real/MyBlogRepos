@@ -10,3 +10,6 @@ D:\SkillFactory\Blog\BlogApp.Contracts\obj\Debug\net7.0\BlogApp.Contracts.dll
 D:\SkillFactory\Blog\BlogApp.Contracts\obj\Debug\net7.0\refint\BlogApp.Contracts.dll
 D:\SkillFactory\Blog\BlogApp.Contracts\obj\Debug\net7.0\BlogApp.Contracts.pdb
 D:\SkillFactory\Blog\BlogApp.Contracts\obj\Debug\net7.0\ref\BlogApp.Contracts.dll
+D:\SkillFactory\Blog\BlogApp.Contracts\bin\Debug\net7.0\BlogApp.Data.dll
+D:\SkillFactory\Blog\BlogApp.Contracts\bin\Debug\net7.0\BlogApp.Data.pdb
+D:\SkillFactory\Blog\BlogApp.Contracts\obj\Debug\net7.0\BlogApp.Contracts.csproj.CopyComplete

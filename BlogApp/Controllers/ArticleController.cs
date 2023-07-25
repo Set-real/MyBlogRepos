@@ -2,20 +2,21 @@
 using BlogApp.Contracts.Models.Articles;
 using BlogApp.Data.Queries;
 using BlogApp.Data.Repositories;
+using BlogApp.Logging.Logger;
 using BlogApp.Model.DataModel;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BlogApp.Controller
+namespace BlogApp.Controllers
 {
     [ApiController]
-    [Route("[ArticleController]")]
+    [Route("[controller]")]
     public class ArticleController : ControllerBase
     {
         public IUserRepository _user;
         public IArticlRepository _articl;
         public IMapper _mapper;
-        public Ilogger _logger;
-        public ArticleController(IArticlRepository articl, IUserRepository user, IMapper mapper, Ilogger logger)
+        public ILogger _logger;
+        public ArticleController(IArticlRepository articl, IUserRepository user, IMapper mapper, ILogger logger)
         {
             _articl = articl;
             _mapper = mapper;
@@ -55,8 +56,6 @@ namespace BlogApp.Controller
             if (user != null)
                 return StatusCode(400, $"Пользователь {user.FirstName} уже существует!");
 
-            _logger.WriteError($"Пользователь {user.FirstName} уже существует!");
-
             // Добавляю статью
             var newArticle = _mapper.Map<ArticlesReqest, Article>(reqest);
             await _articl.CreateArticle(newArticle, user);
@@ -93,13 +92,9 @@ namespace BlogApp.Controller
             if (user == null)
                 return StatusCode(400, "Пользователь не найден!");
 
-            _logger.WriteError("Пользователь не найден!");
-
             var article = _articl.GetArticleById(Id);
             if (article == null)
                 return StatusCode(400, "Статья не найдена");
-
-            _logger.WriteError("Статья не найдена");
 
             var updateArticle = _articl.UpdateArticle(
                 await article,
@@ -120,8 +115,6 @@ namespace BlogApp.Controller
             var article = _articl.GetArticleById(reqest.Id);
             if (article == null)
                 return StatusCode(400, "Статья не найдена!");
-
-            _logger.WriteError("Статья не найдена");
 
             var deliteArticle = _articl.DeleteArticle(await article);
 

@@ -1,9 +1,10 @@
-﻿namespace BlogApp
+﻿using ILogger = BlogApp.Logger.Logger.ILogger;
+
+namespace BlogApp.Logging.Logger
 {
-    public class Logger: Ilogger
+    public class Logger: ILogger
     {
         private ReaderWriterLockSlim lock_ = new ReaderWriterLockSlim();
-
         private string logDirectory { get; set; }
 
         public Logger()
@@ -13,7 +14,6 @@
             if (!Directory.Exists(logDirectory))
                 Directory.CreateDirectory(logDirectory);
         }
-
         public void WriteEvent(string eventMessage)
         {
             lock_.EnterWriteLock();
@@ -30,7 +30,6 @@
             }
 
         }
-
         public void WriteError(string errorMessage)
         {
             lock_.EnterWriteLock();

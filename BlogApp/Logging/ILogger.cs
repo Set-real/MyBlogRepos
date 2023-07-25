@@ -1,6 +1,6 @@
-﻿namespace BlogApp
+﻿namespace BlogApp.Logger.Logger
 {
-    public interface Ilogger
+    public interface ILogger
     {
         public void WriteEvent(string eventMessage);
         public void WriteError(string errorMessage);

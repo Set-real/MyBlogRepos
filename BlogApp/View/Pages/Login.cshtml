@@ -1,0 +1,24 @@
+﻿@model BlogApp.Data.Model.ViewModels.LoginViewModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div>
+    <h4 class="align-content-center">Здравствуйте!</h4>
+    <form asp-controller="AccountManager" action="Login">
+        <div asp-validation-summary="ModelOnly"></div>
+        <div>
+            <div class="">
+                <input asp-for="Email" class="form-control"/>
+                <span asp-validation-for="Email" class="alert-danger"></span>
+            </div>
+            <div>
+                <div class="">
+                    <input asp-for="Password" class="form-control" />
+                    <span asp-validation-for="Password" class="alert-danger"></span>
+                </div>
+            </div>
+            <div class="enter-"
+        </div>
+    </form>
+</div>

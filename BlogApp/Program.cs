@@ -9,21 +9,18 @@ using BlogApp.Contracts.Validation.TegValidators;
 using BlogApp.Contracts.Validation.UserValidators;
 using BlogApp.Data.Context;
 using BlogApp.Data.Repositories;
-using BlogApp.Model;
+using BlogApp.Logging.Logger;
+using BlogApp.Middlewares;
 using FluentValidation;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
-using System.Formats.Tar;
+using ILogger = BlogApp.Logger.Logger.ILogger;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Регистрирую строку подключения
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<BlogContext>(option => option.UseSqlServer(connectionString), ServiceLifetime.Singleton);
+builder.Services.AddControllersWithViews();
 
 // Добавляю маппер
 var mapperConfig = new MapperConfiguration(mc =>
@@ -32,6 +29,9 @@ var mapperConfig = new MapperConfiguration(mc =>
 });
 IMapper mapper = mapperConfig.CreateMapper();
 builder.Services.AddSingleton(mapper);
+
+// Регистрирую логгер
+builder.Services.AddSingleton<ILogger, Logger>();
 
 // Регистрирую сервисы репозитории для взаимодействия с БД
 builder.Services.AddSingleton<IUserRepository, UserRepository>();
@@ -67,7 +67,7 @@ builder.Services.AddAuthentication(options => options.DefaultScheme = "Cookies")
         };
     });
 
-builder.Services.AddRazorPages();
+builder.Services.AddRazorPages(options => { options.RootDirectory = "/View/Pages"; });
 
 var app = builder.Build();
 
@@ -88,6 +88,9 @@ app.UseRouting();
 // Подключаю аутентификацию и авторизацию
 app.UseAuthentication();
 app.UseAuthorization();
+
+// Подключаю мидлвэир
+app.UseLogMiddleware();
 
 app.MapRazorPages();
 
