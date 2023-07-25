@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Security.Authentication;
 using System.Security.Claims;
 
-namespace BlogApp.Controller
+namespace BlogApp.Controllers
 {
     [ExeptionHandler]
     [ApiController]

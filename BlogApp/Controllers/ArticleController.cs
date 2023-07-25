@@ -6,7 +6,7 @@ using BlogApp.Logging.Logger;
 using BlogApp.Model.DataModel;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BlogApp.Controller
+namespace BlogApp.Controllers
 {
     [ApiController]
     [Route("[controller]")]
