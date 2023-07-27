@@ -6,7 +6,17 @@ using System.Threading.Tasks;
 
 namespace BlogApp.Data.Model.ViewModels
 {
-    internal class MainViewModel
+    public class MainViewModel
     {
+        public RegisterViewModel RegisterView { get; set; }
+
+        public LoginViewModel LoginView { get; set; }
+
+
+        public MainViewModel()
+        {
+            RegisterView = new RegisterViewModel();
+            LoginView = new LoginViewModel();
+        }
     }
 }
