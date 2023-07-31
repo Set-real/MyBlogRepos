@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace BlogApp.View.Pages
 {
-    public class RegistModel : PageModel
+    public class ChoseRoleModel : PageModel
     {
         public void OnGet()
         {

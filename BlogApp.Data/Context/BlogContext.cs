@@ -24,10 +24,6 @@ namespace BlogApp.Data.Context
             builder.Entity<Teg>().ToTable("tegs");
             builder.Entity<Comment>().ToTable("comment");
             builder.Entity<Role>().ToTable("roles");
-        }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer("Server=localhost\\SQLEXPRESS;Database=BlogDB;Trusted_Connection=True;");
-        }
+        }       
     }
 }
