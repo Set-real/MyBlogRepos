@@ -93,7 +93,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 // ��������� ��������
-app.UseLogMiddleware();
+app.UseMiddleware<LogMiddleware>();
 
 app.MapRazorPages();
 

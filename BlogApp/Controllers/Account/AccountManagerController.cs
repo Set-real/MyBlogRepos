@@ -20,12 +20,7 @@ namespace BlogApp.Controllers.Account
             _signInManager = signInManager;
             _mapper = mapper;
         }
-        [HttpGet]
-        [Route("Login")]
-        public IActionResult Login() 
-        {
-            return View("Login");
-        }
+       
         [Route("Logout")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -35,33 +30,33 @@ namespace BlogApp.Controllers.Account
             return RedirectToAction("Index", "Home");
         }
 
-        [Route("Login")]
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                var user = _mapper.Map<User>(model);
+        //[Route("Login")]
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Login(LoginViewModel model)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var user = _mapper.Map<User>(model);
 
-                var result = await _signInManager.PasswordSignInAsync(user.Email, model.Password, model.RememberMe, false);
-                if (result.Succeeded)
-                {
-                    if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
-                    {
-                        return Redirect(model.ReturnUrl);
-                    }
-                    else
-                    {
-                        return RedirectToAction("Index", "Home");
-                    }
-                }
-                else
-                {
-                    ModelState.AddModelError("", "Неправильный логин и (или) пароль");
-                }
-            }
-            return View("Views/Home/Index.cshtml");
-        }
+        //        var result = await _signInManager.PasswordSignInAsync(user.Email, model.Password, model.RememberMe, false);
+        //        if (result.Succeeded)
+        //        {
+        //            if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
+        //            {
+        //                return Redirect(model.ReturnUrl);
+        //            }
+        //            else
+        //            {
+        //                return RedirectToAction("Index", "Home");
+        //            }
+        //        }
+        //        else
+        //        {
+        //            ModelState.AddModelError("", "Неправильный логин и (или) пароль");
+        //        }
+        //    }
+        //    return View("Views/Home/Index.cshtml");
+        //}
     }
 }

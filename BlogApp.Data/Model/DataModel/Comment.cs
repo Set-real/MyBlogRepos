@@ -10,6 +10,7 @@
         public DateTime CreateDate { get; set; } = DateTime.Now;
 
         // Комментарий привязан к пользователю
+        
         public Guid User_Id { get; set; }
         public User User { get; set; }
 

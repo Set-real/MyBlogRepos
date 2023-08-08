@@ -2,6 +2,7 @@
 using BlogApp.Model;
 using BlogApp.Model.DataModel;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Emit;
 
 namespace BlogApp.Data.Context
 {
@@ -23,7 +24,11 @@ namespace BlogApp.Data.Context
             builder.Entity<Article>().ToTable("articles");
             builder.Entity<Teg>().ToTable("tegs");
             builder.Entity<Comment>().ToTable("comment");
-            builder.Entity<Role>().ToTable("roles");
-        }       
+            builder.Entity<Role>().ToTable("rolses");
+
+            builder.Entity<Comment>()
+                .HasOne(a => a.User)
+                .WithMany();
+        }
     }
 }

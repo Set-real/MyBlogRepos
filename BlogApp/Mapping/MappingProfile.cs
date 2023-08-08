@@ -23,9 +23,9 @@ internal class MappingProfile : Profile
         CreateMap<Article, ArticleView>();
         CreateMap<Teg, TegView>();
 
-        CreateMap<RegisterViewModel, User>()
+        CreateMap<RegisterViewModel, UserRequest>()
             .ForMember(x => x.Email, opt => opt.MapFrom(x => x.EmailReg))
             .ForMember(x => x.Password, opt => opt.MapFrom(x => x.PasswordReg));
-        CreateMap<LoginViewModel, User>();
+        CreateMap<LoginViewModel, UserRequest>();
     }
 }
