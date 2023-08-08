@@ -19,14 +19,6 @@ namespace BlogApp.Controllers.Account
             _signInManager = signInManager;
             _mapper = mapper;
         }
-
-        [Route("Register")]
-        [HttpGet]
-        public IActionResult Register()
-        {
-            return View("Home/Register");
-        }
-
         [Route("Register")]
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
