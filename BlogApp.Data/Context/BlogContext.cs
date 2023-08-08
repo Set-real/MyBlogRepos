@@ -28,7 +28,10 @@ namespace BlogApp.Data.Context
 
             builder.Entity<Comment>()
                 .HasOne(a => a.User)
-                .WithMany();
+                .WithMany(b => b.Comments)
+                .HasForeignKey(c => c.User_Id)
+                .HasPrincipalKey(d => d.Id)
+                .IsRequired(false);
         }
     }
 }
