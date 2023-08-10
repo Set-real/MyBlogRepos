@@ -18,14 +18,15 @@ internal class MappingProfile : Profile
         CreateMap<CommentReqest, Comment>()
             .ForMember(x => x.Content, opt => opt.MapFrom(c => c.CommentContext));
 
-        CreateMap<User, UserView>();
-        CreateMap<Comment, CommentView>();
-        CreateMap<Article, ArticleView>();
-        CreateMap<Teg, TegView>();
+        CreateMap<User, BlogApp.Contracts.Models.Users.UserViewModel>();
+        CreateMap<Comment, CommentViewModel>();
+        CreateMap<Article, ArticleViewModel>();
+        CreateMap<Teg, TegViewModel>();
 
         CreateMap<RegisterViewModel, UserRequest>()
             .ForMember(x => x.Email, opt => opt.MapFrom(x => x.EmailReg))
             .ForMember(x => x.Password, opt => opt.MapFrom(x => x.PasswordReg));
         CreateMap<LoginViewModel, UserRequest>();
+        CreateMap<TegViewModel, TegRequest>();
     }
 }

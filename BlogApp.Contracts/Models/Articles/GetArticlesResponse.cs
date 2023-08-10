@@ -3,11 +3,11 @@
     public class GetArticlesResponse
     {
         public int ArticleAmont { get; set; }
-        public ArticleView[] articleViews { get ; set; }  
+        public ArticleViewModel[] articleViews { get ; set; }  
 
     }
 
-    public class ArticleView
+    public class ArticleViewModel
     {
         public Guid Id { get; set; }
         public string Content { get; set; }

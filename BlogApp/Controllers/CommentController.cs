@@ -108,7 +108,7 @@ namespace BlogApp.Controllers
             var rasp = new GetCommentResponse
             {
                 CommentAmount = comments.Length,
-                commentView = _mapper.Map<Comment[], CommentView[]>(comments)
+                commentView = _mapper.Map<Comment[], CommentViewModel[]>(comments)
             };
 
             return StatusCode(200, rasp);

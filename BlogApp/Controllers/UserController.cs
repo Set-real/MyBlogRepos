@@ -1,11 +1,13 @@
 ﻿using AutoMapper;
 using BlogApp.Contracts.Models.Users;
+using BlogApp.Data.Model.ViewModels;
 using BlogApp.Data.Queries;
 using BlogApp.Data.Repositories;
 using BlogApp.Handlers;
 using BlogApp.Model;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Authentication;
 using System.Security.Claims;
@@ -15,10 +17,12 @@ namespace BlogApp.Controllers
     [ExeptionHandler]
     [ApiController]
     [Route("[controller]")]
-    public class UserController: ControllerBase
+    public class UserController: Controller
     {    
         IUserRepository _user;
         IMapper _mapper;
+        private readonly UserManager<UserRequest> _userManager;
+        private readonly SignInManager<UserRequest> _signInManager;
 
         public UserController(IUserRepository repository, IMapper mapper)
         {
@@ -38,7 +42,7 @@ namespace BlogApp.Controllers
             var resp = new GetUserResponse
             {
                 UserAmount = user.Length,
-                UserView = _mapper.Map<User[], UserView[]>(user)
+                UserView = _mapper.Map<User[], UserViewModel[]>(user)
             };
 
             return StatusCode(200, resp);
@@ -67,18 +71,29 @@ namespace BlogApp.Controllers
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
+        [Route("Register")]
         [HttpPost]
-        [Route("")]
-        public async Task<IActionResult> RegistUser(UserRequest request)
+        public async Task<IActionResult> Register(RegisterViewModel model)
         {
-            var user = _user.GetUserById(request.Id);
-            if (user != null)
-                return StatusCode(400, "Такой пользователь уже существует!");
+            if (ModelState.IsValid)
+            {
+                var user = _mapper.Map<UserRequest>(model);
 
-            var newUser = _mapper.Map<UserRequest, User>(request);
-            await _user.RegistUser(newUser);
-
-            return StatusCode(200, newUser);
+                var result = await _userManager.CreateAsync(user, model.PasswordReg);
+                if (result.Succeeded)
+                {
+                    await _signInManager.SignInAsync(user, false);
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
+                    }
+                }
+            }
+            return View("AddTeg");
         }
         // <summary>
         /// Метод для обновления пользователя
@@ -135,7 +150,7 @@ namespace BlogApp.Controllers
         /// <exception cref="AuthenticationException"></exception>
         [HttpPost]
         [Route("Authenticate")]
-        public async Task<UserView> Authenticate(UserRequest request, string login, string password)
+        public async Task<Contracts.Models.Users.UserViewModel> Authenticate(UserRequest request, string login, string password)
         {
             if (!string.IsNullOrEmpty(request.Login) ||
                 (!string.IsNullOrEmpty(request.Password)
@@ -163,7 +178,44 @@ namespace BlogApp.Controllers
 
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
 
-            return _mapper.Map<UserView>(user);
+            return _mapper.Map<Contracts.Models.Users.UserViewModel>(user);
+        }
+        [Route("Logout")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
+
+        [Route("Login")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login(LoginViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = _mapper.Map<User>(model);
+
+                var result = await _signInManager.PasswordSignInAsync(user.Email, model.Password, model.RememberMe, false);
+                if (result.Succeeded)
+                {
+                    if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
+                    {
+                        return Redirect(model.ReturnUrl);
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Неправильный логин и (или) пароль");
+                }
+            }
+            return View("Views/Home/Index.cshtml");
         }
     }
 }

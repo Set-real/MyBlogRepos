@@ -14,9 +14,6 @@ using BlogApp.Middlewares;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using ILogger = BlogApp.Logger.Logger.ILogger;
-using Microsoft.Extensions.DependencyInjection;
-using BlogApp.Data;
-using System.Data.Entity.ModelConfiguration.Conventions;
 
 var builder = WebApplication.CreateBuilder(args);
 

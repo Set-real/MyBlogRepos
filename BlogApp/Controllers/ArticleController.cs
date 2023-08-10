@@ -36,7 +36,7 @@ namespace BlogApp.Controllers
             var resp = new GetArticlesResponse
             {
                 ArticleAmont = articles.Length,
-                articleViews = _mapper.Map<Article[], ArticleView[]>(articles)
+                articleViews = _mapper.Map<Article[], ArticleViewModel[]>(articles)
             };
 
             return StatusCode(200, resp);
