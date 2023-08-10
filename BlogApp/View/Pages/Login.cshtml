@@ -1,24 +1,48 @@
-﻿@model BlogApp.Data.Model.ViewModels.LoginViewModel
+﻿@page
+@model BlogApp.Data.Model.ViewModels.LoginViewModel
 @{
     ViewData["Title"] = "Login";
 }
 
 <div>
-    <h4 class="align-content-center">Здравствуйте!</h4>
-    <form asp-controller="AccountManager" action="Login">
+    <h2>Вход в приложение <b-badge></b-badge></h2>
+</div>
+<div class="block-reg background-white">
+    <h4 class="center">Добро пожаловать!</h4>
+    <form class="frm" method="post" asp-controller="AccountManager" asp-action="Login">
         <div asp-validation-summary="ModelOnly"></div>
         <div>
-            <div class="">
-                <input asp-for="Email" class="form-control"/>
-                <span asp-validation-for="Email" class="alert-danger"></span>
+            <div class="mrgn">
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
             </div>
-            <div>
-                <div class="">
-                    <input asp-for="Password" class="form-control" />
-                    <span asp-validation-for="Password" class="alert-danger"></span>
-                </div>
-            </div>
-            <div class="enter-"
         </div>
+        <div>
+            <div class="mrgn">
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+        </div>
+        <div>
+            <input class="enter_submit" type="submit" value="Войти" />
+        </div>
+        <div class="form-check text-start my-3">
+            <input class="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+                <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;">
+                        Запомнить меня
+                    </font>
+                </font>
+            </label>
+        </div>
+        <h5>
+            Впервые с нами?
+            <a asp-page="Register">
+                Зарегистрироваться
+            </a>
+        </h5>
+
     </form>
 </div>
+

@@ -12,7 +12,6 @@ namespace BlogApp.Contracts.Validation.UserValidators
             RuleFor(x => x.Email).NotEmpty().MaximumLength(50).EmailAddress();
             RuleFor(x => x.Login).NotEmpty().MaximumLength(30);
             RuleFor(x => x.Password).NotEmpty().MaximumLength(100);
-            RuleFor(x => x.Birthday).NotEmpty();
         }
     }
 }

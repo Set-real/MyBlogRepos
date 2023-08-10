@@ -1,4 +1,4 @@
-using AutoMapper;
+п»їusing AutoMapper;
 using BlogApp.Contracts.Models.Articles;
 using BlogApp.Contracts.Models.Comments;
 using BlogApp.Contracts.Models.Tegs;
@@ -14,15 +14,18 @@ using BlogApp.Middlewares;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using ILogger = BlogApp.Logger.Logger.ILogger;
+using Microsoft.Extensions.DependencyInjection;
+using BlogApp.Data;
+using System.Data.Entity.ModelConfiguration.Conventions;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Регистрирую строку подключения
+// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<BlogContext>(option => option.UseSqlServer(connectionString), ServiceLifetime.Singleton);
 builder.Services.AddControllersWithViews();
 
-// Добавляю маппер
+// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 var mapperConfig = new MapperConfiguration(mc =>
 {
     mc.AddProfile(new MappingProfile());
@@ -30,16 +33,16 @@ var mapperConfig = new MapperConfiguration(mc =>
 IMapper mapper = mapperConfig.CreateMapper();
 builder.Services.AddSingleton(mapper);
 
-// Регистрирую логгер
+// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 builder.Services.AddSingleton<ILogger, Logger>();
 
-// Регистрирую сервисы репозитории для взаимодействия с БД
+// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅ
 builder.Services.AddSingleton<IUserRepository, UserRepository>();
 builder.Services.AddSingleton<ItegRepository, TegRepository>();
 builder.Services.AddSingleton<ICommentRepository, CommentRepository>();
 builder.Services.AddSingleton<IArticlRepository, ArticleRepository>();
 
-// Регистрация валидиции
+// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 builder.Services.AddScoped<IValidator<UserRequest>, AddUserRequestValidator>();
 builder.Services.AddScoped<IValidator<EditUserRequest>, EditUserRequestValidator>();
 builder.Services.AddScoped<IValidator<ArticlesReqest>, AddArticlesRequestValidator>();
@@ -49,11 +52,11 @@ builder.Services.AddScoped<IValidator<EditCommentReqest>, EditCommentReqestValid
 builder.Services.AddScoped<IValidator<TegRequest>, AddTegRequestValidator>();
 builder.Services.AddScoped<IValidator<EditTegRequest>, EditTegRequestValidator>();
 
-// Подключаю сваггер
+// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 builder.Services.AddSwaggerGen();
 builder.Services.AddEndpointsApiExplorer();
 
-// Если пользователь не проходит аутентификацию, то получает ошибкув
+// пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 builder.Services.AddAuthentication(options => options.DefaultScheme = "Cookies")
     .AddCookie("Cookies", options =>
     {
@@ -85,12 +88,12 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-// Подключаю аутентификацию и авторизацию
+// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 app.UseAuthentication();
 app.UseAuthorization();
 
-// Подключаю мидлвэир
-app.UseLogMiddleware();
+// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+app.UseMiddleware<LogMiddleware>();
 
 app.MapRazorPages();
 

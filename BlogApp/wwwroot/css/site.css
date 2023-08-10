@@ -57,3 +57,25 @@ body {
     white-space: nowrap;
     line-height: 60px; /* Vertically center the text there */
 }
+.block-reg {
+    margin: 20px;
+    padding: 30px;
+    align-content: center;
+    border-radius: 4px;
+    box-shadow: 0 1px 0 0 0, 0 0 0 1px #edeef0;
+}
+.background-white {
+    background-color: white;
+}
+.mrgn{
+    margin: 10px;
+}
+.enter_submit {
+    background-color: #5181b8;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}

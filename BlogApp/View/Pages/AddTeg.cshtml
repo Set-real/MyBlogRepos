@@ -1,0 +1,28 @@
+﻿@page
+@model BlogApp.View.Pages.AddTegModel
+@{
+    ViewData["Title"] = "AddTeg";
+}
+<div>
+    <h2>Добавить тег</h2>
+</div>
+<template>
+    <div>
+        <label for="tags-basic">Введите тег</label>
+        <b-form-tags input-id="tags-basic" v-model="value"></b-form-tags>
+        <p class="mt-2">Value: {{ value }}</p>
+    </div>
+</template>
+<div>
+    <b-link href="#foo">Все теги</b-link>
+</div>
+
+<script>
+    export default {
+        data() {
+            return {
+                value: []
+            }
+        }
+    }
+</script>

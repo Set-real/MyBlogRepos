@@ -4,20 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BlogApp.Contracts.Models.Users
+namespace BlogApp.Data.Model.ViewModels
 {
-    public class GetUserResponse
+    public class UserViewModel
     {
-        public int UserAmount { get; set; }
-        public UserView[] UserView { get; set; }
-    }
-    public class UserView
-    {
-        public Guid Id { get; set; } 
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public DateTime BirthDate { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public string Login { get; set; }
+        public string GetFullName()
+        {
+            return FirstName + " " + LastName;
+        }
     }
 }
