@@ -9,6 +9,7 @@ using BlogApp.Contracts.Validation.TegValidators;
 using BlogApp.Contracts.Validation.UserValidators;
 using BlogApp.Data.Context;
 using BlogApp.Data.Repositories;
+using BlogApp.Data.Repositories.Interfaces;
 using BlogApp.Logging.Logger;
 using BlogApp.Middlewares;
 using FluentValidation;

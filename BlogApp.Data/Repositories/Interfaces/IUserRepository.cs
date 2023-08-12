@@ -1,11 +1,11 @@
 ﻿using BlogApp.Data.Queries;
 using BlogApp.Model;
 
-namespace BlogApp.Data.Repositories
+namespace BlogApp.Data.Repositories.Interfaces
 {
     public interface IUserRepository
     {
-        public Task RegistUser(User user);
+        public Task CreateUser(User user);
         public Task UpdateUser(User user, UpdateUserQuery query);
         public Task DeleteUser(User user);
         public Task<User[]> GetAllUsers();

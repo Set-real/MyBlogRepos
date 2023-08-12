@@ -3,7 +3,7 @@ using BlogApp.Contracts.Models.Articles;
 using BlogApp.Contracts.Models.Comments;
 using BlogApp.Contracts.Models.Users;
 using BlogApp.Data.Queries;
-using BlogApp.Data.Repositories;
+using BlogApp.Data.Repositories.Interfaces;
 using BlogApp.Model.DataModel;
 using Microsoft.AspNetCore.Mvc;
 

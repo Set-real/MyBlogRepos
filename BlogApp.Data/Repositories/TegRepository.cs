@@ -1,5 +1,6 @@
 ﻿using BlogApp.Data.Context;
 using BlogApp.Data.Queries;
+using BlogApp.Data.Repositories.Interfaces;
 using BlogApp.Model.DataModel;
 using Microsoft.EntityFrameworkCore;
 
@@ -77,6 +78,6 @@ namespace BlogApp.Data.Repositories
                 _context.Update(entry);
 
             await _context.SaveChangesAsync();
-        }
+        }       
     }
 }

@@ -2,7 +2,7 @@
 using BlogApp.Model;
 using BlogApp.Model.DataModel;
 
-namespace BlogApp.Data.Repositories
+namespace BlogApp.Data.Repositories.Interfaces
 {
     public interface ICommentRepository
     {

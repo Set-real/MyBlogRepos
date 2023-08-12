@@ -1,8 +1,9 @@
 ﻿using AutoMapper;
 using BlogApp.Contracts.Models.Tegs;
 using BlogApp.Data.Queries;
-using BlogApp.Data.Repositories;
+using BlogApp.Data.Repositories.Interfaces;
 using BlogApp.Model.DataModel;
+using BlogApp.View.Pages;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
@@ -65,15 +66,17 @@ namespace BlogApp.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("CreateTeg")]
-        public async Task<IActionResult> CreateTeg(TegViewModel model)
+        public async Task<IActionResult> CreateTeg(TegRequest request)
         {
-            if (ModelState.IsValid)
-            {
-                var teg = _mapper.Map<Teg>(model);
+            var teg = _teg.GetTegById(request.Id);
+            if (teg != null)
+                return StatusCode(400, "Такой тег уже существует!");
 
-                var resalt = _teg.CreateTeg(teg);
-            }  
-            return View(model);
+            var resalt = _mapper.Map<TegRequest, Teg>(request);
+
+            await _teg.CreateTeg(teg);
+
+            return StatusCode(200, resalt);
         }
         /// <summary>
         /// Метод для удаления тега

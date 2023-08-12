@@ -1,5 +1,6 @@
 ﻿using BlogApp.Data.Context;
 using BlogApp.Data.Queries;
+using BlogApp.Data.Repositories.Interfaces;
 using BlogApp.Model;
 using Microsoft.EntityFrameworkCore;
 
@@ -62,7 +63,7 @@ namespace BlogApp.Data.Repositories
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        public async Task RegistUser(User user)
+        public async Task CreateUser(User user)
         {
             var entry = _context.Entry(user);
             if(entry.State == EntityState.Detached)

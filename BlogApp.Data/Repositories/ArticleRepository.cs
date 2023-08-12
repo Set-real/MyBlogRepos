@@ -1,5 +1,6 @@
 ﻿using BlogApp.Data.Context;
 using BlogApp.Data.Queries;
+using BlogApp.Data.Repositories.Interfaces;
 using BlogApp.Model;
 using BlogApp.Model.DataModel;
 using Microsoft.EntityFrameworkCore;

@@ -1,11 +1,11 @@
 ﻿@page
-@model BlogApp.Data.Model.ViewModels.RegisterViewModel
+@model BlogApp.Contracts.Models.Users.RegisterViewModel
 @{
     ViewData["Title"] = "Register";
 }
 <div class="block-reg background-white">
     <h3 class="center">Регирстрация нового пользователя</h3>
-    <form class="frm" method="post" asp-controller="User" asp-action="Register">
+    <form class="frm" method="post" asp-controller="Registration" asp-action="Register">
         <div asp-validation-summary="ModelOnly"></div>
         <div>
             <h6>Введите имя</h6>

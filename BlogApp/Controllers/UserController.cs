@@ -2,7 +2,7 @@
 using BlogApp.Contracts.Models.Users;
 using BlogApp.Data.Model.ViewModels;
 using BlogApp.Data.Queries;
-using BlogApp.Data.Repositories;
+using BlogApp.Data.Repositories.Interfaces;
 using BlogApp.Handlers;
 using BlogApp.Model;
 using Microsoft.AspNetCore.Authentication;
@@ -67,33 +67,22 @@ namespace BlogApp.Controllers
             }
         }
         /// <summary>
-        /// Метод для регистрации нового пользователя
+        /// Метод для создания пользователя
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        [Route("Register")]
         [HttpPost]
-        public async Task<IActionResult> Register(RegisterViewModel model)
+        [Route("Create")]
+        public async Task<IActionResult> CreateUser(UserRequest request)
         {
-            if (ModelState.IsValid)
-            {
-                var user = _mapper.Map<UserRequest>(model);
+            var user = await _user.GetUserById(request.Id);
+            if (user != null)
+                return StatusCode(400, "Такой пользователь уже существует");
 
-                var result = await _userManager.CreateAsync(user, model.PasswordReg);
-                if (result.Succeeded)
-                {
-                    await _signInManager.SignInAsync(user, false);
-                    return RedirectToAction("Index", "Home");
-                }
-                else
-                {
-                    foreach (var error in result.Errors)
-                    {
-                        ModelState.AddModelError(string.Empty, error.Description);
-                    }
-                }
-            }
-            return View("AddTeg");
+            var resalt = _mapper.Map<UserRequest, User>(request);
+            await _user.CreateUser(user);
+            
+            return StatusCode(200, resalt);
         }
         // <summary>
         /// Метод для обновления пользователя
@@ -180,6 +169,10 @@ namespace BlogApp.Controllers
 
             return _mapper.Map<Contracts.Models.Users.UserViewModel>(user);
         }
+        /// <summary>
+        /// Метод для выхода из приложения
+        /// </summary>
+        /// <returns></returns>
         [Route("Logout")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -188,7 +181,11 @@ namespace BlogApp.Controllers
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
-
+        /// <summary>
+        /// Метод для входа в приложение
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [Route("Login")]
         [HttpPost]
         [ValidateAntiForgeryToken]

@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using BlogApp.Contracts.Models.Articles;
 using BlogApp.Data.Queries;
-using BlogApp.Data.Repositories;
+using BlogApp.Data.Repositories.Interfaces;
 using BlogApp.Logging.Logger;
 using BlogApp.Model.DataModel;
 using Microsoft.AspNetCore.Mvc;
