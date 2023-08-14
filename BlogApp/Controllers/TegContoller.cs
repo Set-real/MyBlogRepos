@@ -74,7 +74,7 @@ namespace BlogApp.Controllers
 
             var resalt = _mapper.Map<TegRequest, Teg>(request);
 
-            await _teg.CreateTeg(teg);
+            await _teg.CreateTeg(await teg);
 
             return StatusCode(200, resalt);
         }
