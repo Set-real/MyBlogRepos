@@ -1,6 +1,7 @@
 ﻿@page
 @model BlogApp.Contracts.Models.Users.RegisterViewModel
 @{
+    Layout = "~/View/Pages/StartPages/_Layout_Start.cshtml";
     ViewData["Title"] = "Register";
 }
 <div class="block-reg background-white">
@@ -50,7 +51,7 @@
             </div>
         </div>
         <div>
-            <input class="enter_submit" type="submit" value="Зарегистрироваться"/>
+            <input class="enter_submit" type="submit" asp-page="/Home/Index" value="Зарегистрироваться"/>
         </div>
     </form>
 </div>

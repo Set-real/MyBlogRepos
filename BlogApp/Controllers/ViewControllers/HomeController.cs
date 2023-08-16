@@ -6,7 +6,7 @@ namespace BlogApp.Controllers.ViewControllers
     public class HomeController : Controller
     {
         // GET: HomeController
-        public ActionResult Home()
+        public ActionResult IndexStart()
         {
             return View();
         }

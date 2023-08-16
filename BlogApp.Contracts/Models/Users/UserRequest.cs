@@ -12,5 +12,6 @@ namespace BlogApp.Contracts.Models.Users
         public string Password { get; set; }
         public string Login { get ; set; }
         public Role Role { get; set; }
+        
     }
 }

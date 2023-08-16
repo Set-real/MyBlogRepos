@@ -30,12 +30,12 @@ namespace BlogApp.Controllers.ViewControllers
             if (ModelState.IsValid)
             {
                 var user = _mapper.Map<RegisterViewModel, UserRequest>(model);
+                await _user.CreateUser(user);
 
                 var result = await _userManager.CreateAsync(user, model.PasswordReg);
                 if (result.Succeeded)
                 {
                     await _signInManager.SignInAsync(user, false);
-                    await _user.CreateUser(user);
                     return View("Home");
                 }
                 else
