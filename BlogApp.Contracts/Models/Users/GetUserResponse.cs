@@ -9,15 +9,18 @@ namespace BlogApp.Contracts.Models.Users
     public class GetUserResponse
     {
         public int UserAmount { get; set; }
-        public UserView[] UserView { get; set; }
+        public UserViewModel[] UserView { get; set; }
     }
-    public class UserView
+    public class UserViewModel
     {
-        public Guid Id { get; set; } 
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public DateTime BirthDate { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public string Login { get; set; }
+        public string GetFullName()
+        {
+            return FirstName + " " + LastName;
+        }
     }
 }

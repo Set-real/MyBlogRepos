@@ -1,5 +1,23 @@
 ﻿@page
-@model BlogApp.View.Pages.TegsModel
+@model BlogApp.Contracts.Models.Tegs.TegViewModel
 @{
-    ViewData["Title"] = "Теги";
+    Layout = "~/View/Pages/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Tegs";
 }
+<h4>Добавление нового тега</h4>
+<div class="block-reg background-white">
+    <h4 class="align-content-center">Введите значение</h4>
+    <form class="frm" method="post" asp-controller="Teg" asp-action="CreateTeg">
+        <div asp-validation-summary="ModelOnly"></div>
+        <div>
+            <div class="mrgn">
+                <input asp-for="Value" class="form-control" />
+                <span asp-validation-for="Value" class="text-danger"></span>
+            </div>
+        </div>
+        <div>
+            <input class="enter_submit" type="submit" value="Добавить" />
+        </div>
+        <h6 class="align-content-center"><a asp-page="/Menu/Tegs">Перейти к списку всех тегов</a> </h6>
+    </form>
+</div>

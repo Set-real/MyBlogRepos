@@ -3,7 +3,7 @@ using BlogApp.Contracts.Models.Articles;
 using BlogApp.Contracts.Models.Comments;
 using BlogApp.Contracts.Models.Users;
 using BlogApp.Data.Queries;
-using BlogApp.Data.Repositories;
+using BlogApp.Data.Repositories.Interfaces;
 using BlogApp.Model.DataModel;
 using Microsoft.AspNetCore.Mvc;
 
@@ -108,7 +108,7 @@ namespace BlogApp.Controllers
             var rasp = new GetCommentResponse
             {
                 CommentAmount = comments.Length,
-                commentView = _mapper.Map<Comment[], CommentView[]>(comments)
+                commentView = _mapper.Map<Comment[], CommentViewModel[]>(comments)
             };
 
             return StatusCode(200, rasp);

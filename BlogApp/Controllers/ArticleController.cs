@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using BlogApp.Contracts.Models.Articles;
 using BlogApp.Data.Queries;
-using BlogApp.Data.Repositories;
+using BlogApp.Data.Repositories.Interfaces;
 using BlogApp.Logging.Logger;
 using BlogApp.Model.DataModel;
 using Microsoft.AspNetCore.Mvc;
@@ -36,7 +36,7 @@ namespace BlogApp.Controllers
             var resp = new GetArticlesResponse
             {
                 ArticleAmont = articles.Length,
-                articleViews = _mapper.Map<Article[], ArticleView[]>(articles)
+                articleViews = _mapper.Map<Article[], ArticleViewModel[]>(articles)
             };
 
             return StatusCode(200, resp);

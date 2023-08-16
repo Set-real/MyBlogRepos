@@ -1,11 +1,12 @@
 ﻿@page
-@model BlogApp.Data.Model.ViewModels.RegisterViewModel
+@model BlogApp.Contracts.Models.Users.RegisterViewModel
 @{
+    Layout = "~/View/Pages/StartPages/_Layout_Start.cshtml";
     ViewData["Title"] = "Register";
 }
 <div class="block-reg background-white">
     <h3 class="center">Регирстрация нового пользователя</h3>
-    <form class="frm" method="post" asp-controller="RegisterController" asp-action="Register">
+    <form class="frm" method="post" asp-controller="Registration" asp-action="Register">
         <div asp-validation-summary="ModelOnly"></div>
         <div>
             <h6>Введите имя</h6>
@@ -23,7 +24,7 @@
         </div>
         <div>
             <h6>Введите логин</h6>
-            <<div class="mrgn">
+            <div class="mrgn">
                 <input asp-for="Login" class="form-control" />
                 <span asp-validation-for="Login" class="text-danger"></span>
             </div>
@@ -50,7 +51,7 @@
             </div>
         </div>
         <div>
-            <input class="enter_submit" type="submit" value="Зарегистрироваться" asp-controller="User" asp-action="RegistUser" />
+            <input class="enter_submit" type="submit" asp-page="/Home/Index" value="Зарегистрироваться"/>
         </div>
     </form>
 </div>

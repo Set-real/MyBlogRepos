@@ -1,15 +1,17 @@
 ﻿using AutoMapper;
 using BlogApp.Contracts.Models.Tegs;
 using BlogApp.Data.Queries;
-using BlogApp.Data.Repositories;
+using BlogApp.Data.Repositories.Interfaces;
 using BlogApp.Model.DataModel;
+using BlogApp.View.Pages;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace BlogApp.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class TegContoller : ControllerBase
+    public class TegContoller : Controller
     {
         ItegRepository _teg;
         IArticlRepository _articl;
@@ -33,7 +35,7 @@ namespace BlogApp.Controllers
             var resp = new GetTegResponse
             {
                 TegAmount = teg.Length,
-                TegView = _mapper.Map<Teg[], TegView[]>(teg)
+                TegView = _mapper.Map<Teg[], TegViewModel[]>(teg)
             };
 
             return StatusCode(200, resp);
@@ -63,16 +65,18 @@ namespace BlogApp.Controllers
         /// <param name="request"></param>
         /// <returns></returns>
         [HttpPost]
-        [Route("")]
+        [Route("CreateTeg")]
         public async Task<IActionResult> CreateTeg(TegRequest request)
         {
             var teg = _teg.GetTegById(request.Id);
-            if (teg == null)
-                return StatusCode(400, "Такой тег не найден!");
+            if (teg != null)
+                return StatusCode(400, "Такой тег уже существует!");
 
-            var newTeg = _teg.CreateTeg(await teg);
+            var resalt = _mapper.Map<TegRequest, Teg>(request);
 
-            return StatusCode(200, newTeg);
+            await _teg.CreateTeg(await teg);
+
+            return StatusCode(200, resalt);
         }
         /// <summary>
         /// Метод для удаления тега

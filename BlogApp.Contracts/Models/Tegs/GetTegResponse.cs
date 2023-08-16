@@ -3,9 +3,9 @@
     public class GetTegResponse
     {
         public int TegAmount { get; set; }
-        public TegView[] TegView { get; set; }
+        public TegViewModel[] TegView { get; set; }
     }
-    public class TegView
+    public class TegViewModel
     {
         public Guid Id { get; set; }
         public string Value { get; set; }

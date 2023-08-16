@@ -9,14 +9,12 @@ using BlogApp.Contracts.Validation.TegValidators;
 using BlogApp.Contracts.Validation.UserValidators;
 using BlogApp.Data.Context;
 using BlogApp.Data.Repositories;
+using BlogApp.Data.Repositories.Interfaces;
 using BlogApp.Logging.Logger;
 using BlogApp.Middlewares;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using ILogger = BlogApp.Logger.Logger.ILogger;
-using Microsoft.Extensions.DependencyInjection;
-using BlogApp.Data;
-using System.Data.Entity.ModelConfiguration.Conventions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -96,5 +94,9 @@ app.UseAuthorization();
 app.UseMiddleware<LogMiddleware>();
 
 app.MapRazorPages();
+
+app.MapControllerRoute(
+            name: "default",
+            pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
